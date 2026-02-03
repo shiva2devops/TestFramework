@@ -15,7 +15,7 @@ public class BaseTest {
     protected Properties prop;
     Page page;
     @Parameters({"browser"})
-    @BeforeTest
+    @BeforeTest(alwaysRun = true)
     public void browser_init(String browserName){
         pf=new playwrightfactory();
         prop=pf.init_prop();
@@ -26,7 +26,7 @@ public class BaseTest {
         hp=new Homepage(page);
 
     }
-    @AfterTest
+    @AfterTest(alwaysRun = true)
     public void teardown(){
        page.context().browser().close();
     }

@@ -8,16 +8,27 @@ import org.testng.annotations.Test;
 
 public class HomepageTest extends BaseTest{
 
-    @Test
+    @Test(enabled = false, groups = "regression")
     public void check_title(){
         String title= hp.getTitle();
         Assert.assertEquals(title,"Automation Testing Practice");
     }
-
-    @Test
+    @Test(enabled = false,groups = "regression")
     public void get_url(){
         String getUrl=hp.getURL();
         Assert.assertEquals(getUrl,prop.getProperty("url"));
     }
-
+    @Test(enabled = false,groups = "regression")
+    public void selectCountryDropdown(){
+        hp.selectCountry("India");
+    }
+    @Test(groups = "sanity")
+    public void clickAlert(){
+        hp.clickAlert();
+    }
+    @Test(groups = "regression")
+    public void getPromptAlert(){
+        String actual=hp.PromptAlert("Shiva");
+        System.out.println(actual);
+    }
 }

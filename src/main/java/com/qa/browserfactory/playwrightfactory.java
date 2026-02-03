@@ -40,7 +40,7 @@ public class playwrightfactory {
         System.out.println("browser initiated :"+BrowserName);
        switch (BrowserName.toLowerCase()){
            case "chromium":
-               tlBrowser.set(getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false)));
+               tlBrowser.set(getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(3000)));
                break;
            case "chrome":
                tlBrowser.set(getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setChannel("chrome").setHeadless(false)));
