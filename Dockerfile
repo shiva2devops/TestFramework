@@ -4,6 +4,12 @@ WORKDIR /app
 
 RUN apt-get update && apt-get install -y \
   libglib2.0-0 \
+  libx11-xcb1\
+  libxcursor1\
+  libgtk-3-0\
+  libpangocairo-1.0-0\
+  libcairo-gobject2\
+  libgdk-pixbuf-2.0-0\
   libnspr4 \
   libnss3 \
   libdbus-1-3 \
