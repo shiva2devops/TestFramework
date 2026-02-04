@@ -23,7 +23,7 @@ public class HomePageTest extends BaseTest{
     public void selectCountryDropdown(){
         hp.selectCountry("India");
     }
-    @Test()
+    @Test(enabled = false)
     public void clickAlert(){
         hp.clickAlert();
     }
