@@ -5,6 +5,7 @@ import com.microsoft.playwright.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 public class playwrightfactory {
@@ -65,19 +66,37 @@ public class playwrightfactory {
 
     }
 
+//    public Properties init_prop() {
+//        FileInputStream fi= null;
+//        try {
+//            fi = new FileInputStream("src\\test\\resources\\configproperties\\config.properties");
+//            prop=new Properties();
+//            prop.load(fi);
+//        }  catch (FileNotFoundException e) {
+//            throw new RuntimeException(e);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//        return prop;
+//
+//    }
     public Properties init_prop() {
-        FileInputStream fi= null;
+        Properties prop = new Properties();
         try {
-            fi = new FileInputStream("src\\test\\resources\\configproperties\\config.properties");
-            prop=new Properties();
-            prop.load(fi);
-        }  catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+            InputStream ip = getClass()
+                    .getClassLoader()
+                    .getResourceAsStream("configproperties/config.properties");
+
+            if (ip == null) {
+                throw new RuntimeException("config.properties not found in classpath");
+            }
+
+            prop.load(ip);
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
         return prop;
-
     }
+
 
 }
