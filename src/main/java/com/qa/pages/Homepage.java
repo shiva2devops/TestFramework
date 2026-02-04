@@ -2,8 +2,7 @@ package com.qa.pages;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
-
-import java.util.List;
+import com.microsoft.playwright.options.WaitForSelectorState;
 
 public class Homepage {
  private Page page;
@@ -12,10 +11,12 @@ public class Homepage {
  private String country="select#country:has-text('India')";
  private String simple_Alert= "#alertBtn";
  private String alertConfirmText="#demo";
-
+ private String name="#name";
+ private String email="#email";
+ private String phone="#phone";
+ private String address="#textarea";
+ private String popup="#PopUp";
  private String promptbtn="button[onclick='myFunctionPrompt()']";
-
-
 
     public Homepage(Page page){
         this.page=page;
@@ -32,19 +33,18 @@ public class Homepage {
         return url;
     }
 
-    public void selectCountry(String selectcountry){
-        page.locator(dropdown_click).selectOption(selectcountry);
-//        page.click(dropdown_click);
-//        Locator lc=page.locator(country);
-//        List<String> countrylist=lc.allInnerTexts();
-//        System.out.println(countrylist);
-//        for(String s:countrylist) {
-//            if (s.contains(selectcountry)) {
-//                lc.click();
-//            }
-//        }
-//        return selectcountry;
+    public void enterdetails(String Name,String Email, String Phone, String Address){
+        page.fill(name,Name);
+        page.fill(email,Email);
+        page.fill(phone,Phone);
+        page.fill(address,Address);
+    }
 
+    public void selectCountry(String selectcountry){
+        Locator dropdown = page.locator(dropdown_click);
+        dropdown.waitFor(new Locator.WaitForOptions()
+                .setState(WaitForSelectorState.VISIBLE));
+        dropdown.selectOption(selectcountry);
     }
 
     public void clickAlert(){
@@ -65,6 +65,17 @@ public class Homepage {
         String text=page.textContent(alertConfirmText);
 
         return text;
+    }
+    public String popwindow(){
+        Page newPage = page.context().waitForPage(() -> {
+            page.click(popup);
+        });
+
+        newPage.waitForLoadState();
+        String title=newPage.title();
+        page.bringToFront();
+
+        return title;
     }
 
 

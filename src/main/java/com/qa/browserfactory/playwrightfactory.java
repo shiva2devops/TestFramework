@@ -16,7 +16,7 @@ public class playwrightfactory {
     Properties prop;
     private static ThreadLocal<Page> tlpage=new ThreadLocal<>();
     private static ThreadLocal<Browser> tlBrowser = new ThreadLocal<>();
-    private static ThreadLocal<BrowserContext> tlContext = new ThreadLocal<>();
+    public static ThreadLocal<BrowserContext> tlContext = new ThreadLocal<>();
     private static ThreadLocal<Playwright> tlPlaywright = new ThreadLocal<>();
     public static Playwright getPlaywright() {
         return tlPlaywright.get();
@@ -41,7 +41,7 @@ public class playwrightfactory {
         System.out.println("browser initiated :"+BrowserName);
        switch (BrowserName.toLowerCase()){
            case "chromium":
-               tlBrowser.set(getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setHeadless(true).setSlowMo(3000)));
+               tlBrowser.set(getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(3000)));
                break;
            case "chrome":
                tlBrowser.set(getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setChannel("chrome").setHeadless(false)));

@@ -4,20 +4,20 @@
 
     <test name="Regression tests_chromium">
         <parameter name="browser" value="chromium"/>
-         <groups>
-            <run>
-                <include name="sanity"/>
-            </run>
-         </groups>
+<!--         <groups>-->
+<!--            <run>-->
+<!--                <include name="sanity"/>-->
+<!--            </run>-->
+<!--         </groups>-->
         <classes>
-            <class name="com.qa.Tests.HomepageTest"/>
+            <class name="com.qa.Tests.HomePageTest"/>
         </classes>
     </test>
 
 <!--    <test name="Regression tests_chrome">-->
 <!--        <parameter name="browser" value="chrome"/>-->
 <!--        <classes>-->
-<!--            <class name="com.qa.Tests.HomepageTest">-->
+<!--            <class name="com.qa.Tests.HomePageTest">-->
 <!--                <methods>-->
 <!--                    <include name="check_title"/>-->
 <!--                    <include name="get_url"/>-->
