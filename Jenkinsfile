@@ -1,50 +1,34 @@
-pipeline 
-{
-    agent {
-       docker{
-              image 'maven:3.9.6-eclipse-temurin-21'
-              args '-v /root/.m2:/root/.m2'
-       }
+pipeline {
+    agent any
+
+    environment {
+        IMAGE_NAME = "maven-test-runner"
     }
 
-    stages 
-    {
-        stage('Build') 
-        {
-            steps
-            {
-                 git 'https://github.com/jglick/simple-maven-project-with-tests.git'
-                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
-            }
-            post 
-            {
-                success
-                {
-                    junit '**/target/surefire-reports/TEST-*.xml'
-                    archiveArtifacts 'target/*.jar'
-                }
-            }
-        }
-        
-        
-        
-        stage("Deploy to QA"){
-            steps{
-                echo("deploy to qa")
-            }
-        }
-                
-        stage('Regression Automation Test') {
+    stages {
+
+        stage('Checkout') {
             steps {
-                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    git 'https://github.com/naveenanimation20/Playwright-Java-PageObjectModel'
-                    sh "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/testng-regression.xml"
-                    
-                }
+                git branch: 'main', url: 'https://github.com/shiva2devops/TestFramework.git'
             }
         }
-        
-        
+
+        stage('Build Docker Image') {
+            steps {
+                bat 'docker build -t %IMAGE_NAME% .'
+            }
+        }
+
+        stage('Run Tests in Docker') {
+            steps {
+                bat 'docker run --rm %IMAGE_NAME%'
+            }
+        }
+    }
+
+    post {
+        always {
+            bat 'docker system prune -f'
+        }
     }
 }
-
