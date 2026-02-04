@@ -28,6 +28,8 @@ public class BaseTest {
     }
     @AfterTest(alwaysRun = true)
     public void teardown(){
-       page.context().browser().close();
+       if(page!=null) {
+           page.context().browser().close();
+       }
     }
 }
