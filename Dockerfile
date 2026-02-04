@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/playwright/java:v1.56.1-jammy
+FROM mcr.microsoft.com/playwright/java:latest-jammy
 
 WORKDIR /app
 
