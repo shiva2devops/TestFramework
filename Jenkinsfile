@@ -1,34 +1,47 @@
-pipeline {
+pipeline
+{
     agent any
 
-    environment {
-        IMAGE_NAME = "maven-test-runner"
-    }
+    tools{
+    	maven 'maven'
+        }
 
-    stages {
-
-        stage('Checkout') {
-            steps {
-                git branch: 'main', url: 'https://github.com/shiva2devops/TestFramework.git'
+    stages
+    {
+        stage('Build')
+        {
+            steps
+            {
+                 git 'https://github.com/jglick/simple-maven-project-with-tests.git'
+                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
+            }
+            post
+            {
+                success
+                {
+                    junit '**/target/surefire-reports/TEST-*.xml'
+                    archiveArtifacts 'target/*.jar'
+                }
             }
         }
 
-        stage('Build Docker Image') {
-            steps {
-                bat 'docker build -t %IMAGE_NAME% .'
+
+
+        stage("Deploy to QA"){
+            steps{
+                echo("deploy to qa")
             }
         }
 
-        stage('Run Tests in Docker') {
+        stage('Regression Automation Test') {
             steps {
-                bat 'docker run --rm %IMAGE_NAME%'
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    git 'https://github.com/shiva2devops/TestFramework.git'
+                    sh "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/testng-regression.xml"
+
+                }
             }
         }
-    }
 
-    post {
-        always {
-            bat 'docker system prune -f'
-        }
     }
 }
