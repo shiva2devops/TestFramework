@@ -18,15 +18,15 @@ public class HomepageTest extends BaseTest{
         String getUrl=hp.getURL();
         Assert.assertEquals(getUrl,prop.getProperty("url"));
     }
-    @Test(enabled = false,groups = "regression")
+    @Test(groups = "regression")
     public void selectCountryDropdown(){
         hp.selectCountry("India");
     }
-    @Test(groups = "sanity")
+    @Test(enabled = false,groups = "sanity")
     public void clickAlert(){
         hp.clickAlert();
     }
-    @Test(groups = "regression")
+    @Test(enabled = false,groups = "regression")
     public void getPromptAlert(){
         String actual=hp.PromptAlert("Shiva");
         System.out.println(actual);

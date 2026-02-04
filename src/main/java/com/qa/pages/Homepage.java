@@ -32,17 +32,18 @@ public class Homepage {
         return url;
     }
 
-    public String selectCountry(String selectcountry){
-        page.click(dropdown_click);
-        Locator lc=page.locator(country);
-        List<String> countrylist=lc.allInnerTexts();
-        System.out.println(countrylist);
-        for(String s:countrylist) {
-            if (s.contains(selectcountry)) {
-                lc.click();
-            }
-        }
-        return selectcountry;
+    public void selectCountry(String selectcountry){
+        page.locator(dropdown_click).selectOption(selectcountry);
+//        page.click(dropdown_click);
+//        Locator lc=page.locator(country);
+//        List<String> countrylist=lc.allInnerTexts();
+//        System.out.println(countrylist);
+//        for(String s:countrylist) {
+//            if (s.contains(selectcountry)) {
+//                lc.click();
+//            }
+//        }
+//        return selectcountry;
 
     }
 

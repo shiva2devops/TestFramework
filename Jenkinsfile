@@ -1,14 +1,11 @@
 pipeline 
 {
-    agent any
-
-    environment {
-        MAVEN_OPTS = "--add-opens jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED"
+    agent {
+       docker{
+              image 'maven:3.9.6-eclipse-temurin-21'
+              args '-v /root/.m2:/root/.m2'
+       }
     }
-
-    tools{
-    	maven 'maven'
-        }
 
     stages 
     {
