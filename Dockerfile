@@ -36,6 +36,8 @@ RUN mvn dependency:go-offline
 
 COPY . .
 
+RUN mvn exec:java -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install-deps"
+
 # Install Playwright browsers
 RUN mvn exec:java -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install chromium"
 
