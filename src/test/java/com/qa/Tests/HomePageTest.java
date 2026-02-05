@@ -8,7 +8,7 @@ public class HomePageTest extends BaseTest{
     @Test()
     public void check_title(){
         String title= hp.getTitle();
-        Assert.assertEquals(title,"Automation Testing Practice");
+        Assert.assertEquals(title,"Automation Testing Practi");
     }
     @Test()
     public void get_url(){

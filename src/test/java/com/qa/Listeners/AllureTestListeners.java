@@ -1,11 +1,14 @@
 package com.qa.Listeners;
 
 import com.qa.Tests.BaseTest;
+import io.qameta.allure.Allure;
 import org.testng.ITestListener;
 import org.testng.*;
 import com.qa.Utility.AllureUtils;
 
 public class AllureTestListeners implements ITestListener {
+
+    ThreadLocal<Allure> test=new ThreadLocal<Allure>();
 
     @Override
     public void onTestStart(ITestResult result) {
@@ -28,7 +31,7 @@ public class AllureTestListeners implements ITestListener {
 
             if (base.page != null) {
                 // Screenshot
-                AllureUtils.attachScreenshot(base.page);
+                AllureUtils.takescreenshot(base.page);
 
                 // Page source (optional but very useful)
                 String html = base.page.content();

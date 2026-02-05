@@ -3,6 +3,8 @@ package com.qa.Browserfactory;
 import com.microsoft.playwright.*;
 
 import java.io.InputStream;
+import java.nio.file.Paths;
+import java.util.Base64;
 import java.util.Properties;
 
 public class playwrightfactory {
@@ -93,6 +95,14 @@ public class playwrightfactory {
             throw new RuntimeException(e);
         }
         return prop;
+    }
+
+    public static String takescreenshot(){
+        String path=System.getProperty("user.dir")+"/screenshot/"+System.currentTimeMillis()+".png";
+
+        byte[] buffer=getPage().screenshot(new Page.ScreenshotOptions().setPath(Paths.get(path)).setFullPage(true));
+        String base64Path = Base64.getEncoder().encodeToString(buffer);
+        return base64Path;
     }
 
 
