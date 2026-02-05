@@ -1,8 +1,8 @@
 package com.qa.Tests;
 
 import com.microsoft.playwright.Page;
-import com.qa.browserfactory.playwrightfactory;
-import com.qa.pages.Homepage;
+import com.qa.Browserfactory.playwrightfactory;
+import com.qa.Pages.Homepage;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
@@ -13,7 +13,7 @@ public class BaseTest {
     playwrightfactory pf;
     protected Homepage hp;
     protected Properties prop;
-    Page page;
+    public Page page;
     @Parameters({"browser"})
     @BeforeTest(alwaysRun = true)
     public void browser_init(String browserName){

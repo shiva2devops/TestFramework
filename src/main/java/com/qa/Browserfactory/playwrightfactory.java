@@ -1,10 +1,7 @@
-package com.qa.browserfactory;
+package com.qa.Browserfactory;
 
 import com.microsoft.playwright.*;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
