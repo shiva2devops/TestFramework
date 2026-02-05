@@ -14,7 +14,7 @@ public class Homepage {
  private String name="#name";
  private String email="#email";
  private String phone="#phone";
- private String address="#textarea";
+ private String address="#textare";
  private String popup="#PopUp";
  private String promptbtn="button[onclick='myFunctionPrompt()']";
 
