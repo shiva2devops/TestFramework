@@ -1,5 +1,6 @@
 package com.qa.Tests;
 
+import com.microsoft.playwright.assertions.PlaywrightAssertions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -8,7 +9,7 @@ public class HomePageTest extends BaseTest{
     @Test()
     public void check_title(){
         String title= hp.getTitle();
-        Assert.assertEquals(title,"Automation Testing Practi");
+        Assert.assertEquals(title,"Automation Testing Practice");
     }
     @Test()
     public void get_url(){

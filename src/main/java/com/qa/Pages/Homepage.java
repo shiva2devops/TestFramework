@@ -4,6 +4,8 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.WaitForSelectorState;
 
+import java.util.List;
+
 public class Homepage {
  private Page page;
 
@@ -70,7 +72,6 @@ public class Homepage {
         Page newPage = page.context().waitForPage(() -> {
             page.click(popup);
         });
-
         newPage.waitForLoadState();
         String title=newPage.title();
         page.bringToFront();
